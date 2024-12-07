@@ -35,6 +35,8 @@ DARK_YELLOW		=	\033[38;5;143m
 
 TARGET			= megaphone
 OBJDIR 			= ./obj/
+
+REQUIRED_DIRS	= $(OBJDIR)
 # ============================================================================ #
 #                               COMPILER SETUP                                 #
 # ============================================================================ #
@@ -42,7 +44,7 @@ CC 				= c++ -std=c++98
 WRNFL			= -Wall -Wextra -Werror -Wconversion -Wdouble-promotion #-fsanitize=address
 DBGFL			= -g3  -pg
 CFLGS			= $(DBGFL) $(WRNFL) -c 
-HEADS			= -I$(INCDIR)
+#HEADS			= -I$(INCDIR)
 LFLGS 			= #-fsanitize=address
 
 
@@ -50,29 +52,31 @@ SRCS_TARGET	= 	megaphone.cpp
 
 
 FILE_TARGET = $(addprefix $(SRCDIR_TARGET), $(SRCS_TARGET))
-OBJS_TARGET = $(addprefix $(OBJDIR), $(SRCS_MINRT:.cpp=.o))
-DEPE_TARGET = $(addprefix $(OBJDIR), $(SRCS_MINRT:.cpp=.d))
+OBJS_TARGET = $(addprefix $(OBJDIR), $(SRCS_TARGET:.cpp=.o))
+DEPE_TARGET = $(addprefix $(OBJDIR), $(SRCS_TARGET:.cpp=.d))
 
-$(info tests object patha $(LLIBS))
+$(info tests  $(FILE_TARGET))
+$(info object  $(OBJS_TARGET))
+$(info patha $(DEPE_TARGET))
 
 # ============================================================================ #
 #                                 RULES                                        #
 # ============================================================================ #
-all: makedirs: $(TARGET)
+all: makedirs $(TARGET)
 -include $(DEPE_TARGET)
 
 # .......................... directories creation ............................ #
 makedirs:
 	$(shell for d in $(REQUIRED_DIRS); \
  				do \
- 					[[ -d $$d ]] || mkdir -p $$d; \
+ 					[ -d $$d ] || mkdir -p $$d; \
  				done)
  
 # ....................... dependencies construction .......................... #
 #for each c file create its dependency file 
 #READ GNU make  manual 4.14 Generating Prerequisites Automatically.
 #READ GNU gcc manuel 3.13 Options controlling the preprocessor.
-%.d: %.c
+%.d: %.cpp
 	@set -e; rm -f $@; \
 	$(CC) $(HEADS) -MM $< > $@.$$$$ ; \
 	sed 's,\($*\)\.o[ :]*,\1.o $@ : ,g' < $@.$$$$ > $@; \
@@ -81,12 +85,12 @@ makedirs:
 # .......................... targets construction ............................ #
 $(TARGET): Makefile  $(OBJS_TARGET)
 	@echo "$(GREEN)========== GATHERING MINIRT OBJECTS =============$(DEF_COLOR)"
-	$(CC) $(LFLGS) $(OBJS_MINRT) -o $@ $(LLIBS) $(FRAMEWORKS)
+	$(CC) $(LFLGS) $(OBJS_TARGET) -o $@ $(LLIBS) $(FRAMEWORKS)
 
 # .......................... objects construction ............................ #
-$(OBJDIR)%.o: $(SRCDIR_MINRT)%.c $(INCDIR)$(HEADER_iRT)
+$(OBJDIR)%.o: $(SRCDIR_TARGET)%.cpp 
 	@echo "$(GREEN)========== COMPILING MINIRT FILES ===============$(DEF_COLOR)"
-	$(CC) $(CFLGS) $< -o $@ $(HEADS)  
+	$(CC) $(CFLGS) $< -o $@   
 
 $(NAME): $(OBJ)
 	$(CC) -o $(NAME) $(OBJ) $(LFLAGS)

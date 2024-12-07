@@ -15,5 +15,10 @@
 int	main(int argc, char **argv)
 {
 	std::cout << "Hello World";
+	if (argc == 1)
+		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *";
+	else
+		std::cout << argv[1];
+
 	return (0);
 }
