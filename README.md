@@ -37,3 +37,20 @@ Below are the key features and improvements brought by C++ 98:
 ```c++
 g++ -std=c++98 main.cpp -o main
 ```
+
+### ex00
+
+Write a program that behaves as follows
+
+```bash
+$>./megaphone "shhhhh... I think the students are asleep..."
+SHHHHH... I THINK THE STUDENTS ARE ASLEEP...
+$>./megaphone Damnit " ! " "Sorry students, I thought this thing was off."
+DAMNIT ! SORRY STUDENTS, I THOUGHT THIS THING WAS OFF.
+$>./megaphone
+* LOUD AND UNBEARABLE FEEDBACK NOISE *
+$>
+```
+
+
+

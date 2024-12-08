@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   megaphone.cpp                                      :+:      :+:    :+:   */
+/*   MyAwesomePhoneBook.cpp                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: luicasad <luicasad@student.42barcelona.com +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,20 +13,26 @@
 #include <iostream>
 #include <string>
 
-int	main(int argc, char **argv)
+int main(void)
 {
-	if (argc == 1)
-		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *";
-	else
-	{
-		for (int i = 1; i < argc; i++)
-		{
-			std::string word = argv[i];
-			for (std::size_t k = 0; k < word.size(); k++)
-				std::cout << (char)std::toupper(word[k]);
-		}
-		std::cout << std::endl;
-	}
+    bool end = false;
 
-	return (0);
+    while (!end)
+    {
+        std::string command;
+        std::cout << "Enter one command (ADD, SEARCH, EXIT) ==> " << std::endl;
+        std::cin >> command;
+        if (command == "ADD")
+            std::cout << "añadir\n";
+        else if (command == "SEARCH")
+            std::cout << "buscar\n";
+        else if (command == "EXIT")
+        {
+                std::cout << "salir";
+                end = true;
+        }
+        else
+                std::cout << "No entendí";
+    }
+    return (0);
 }
