@@ -53,4 +53,91 @@ $>
 ```
 
 
+# cpp Piscine
+## Namespaces
+
+Scope resolution operator `::`
+
+
+
+```cpp
+#include <stdio.h>
+
+int	gl_var = 1;
+int	f( void ) { return (2); }
+
+namespace	Foo
+{
+	int	gl_var = 3;
+	int	f( void ) { return (4); }
+}
+
+namespace	Bar
+{
+	int	gl_var = 5;
+	int	f( void ) { return (6); }
+}
+
+namespace Muf = Bar;
+
+int	main ( void )
+{
+	printf( "gl_var:     [%d]\n", gl_var );
+	printf( "f():        [%d]\n\n", f() );
+
+	printf( "gl_var:     [%d]\n", Foo::gl_var );
+	printf( "f():        [%d]\n\n", Foo::f() );
+
+	printf( "gl_var:     [%d]\n", Bar::gl_var );
+	printf( "f():        [%d]\n\n", Bar::f() );
+
+	printf( "gl_var:     [%d]\n", Muf::gl_var );
+	printf( "f():        [%d]\n\n", Muf::f() );
+
+	printf( "gl_var:     [%d]\n", ::gl_var );
+	printf( "f():        [%d]\n\n", ::f() );
+
+	return (0);
+}
+```
+
+``` bash
+gl_var:     [1]
+f():        [2]
+
+gl_var:     [3]
+f():        [4]
+
+gl_var:     [5]
+f():        [6]
+
+gl_var:     [5]
+f():        [6]
+
+gl_var:     [1]
+f():        [2]
+```
+
+## iostreams
+
+Two magical objects `cin` and 'cout'
+Two new operators `<<` (back arrows or ) and `>>` (forward arrows or greater than greater than)
+
+```cpp
+#include <iostream>
+ std::endl
+ ```
+
+ `endl` is an object from standard library that represents the `carriage return` for the operating system.
+
+ [c++ iosstream reference](https://cplusplus.com/reference/iostream/)
+ 
+ ## classes and instances
+
+Do not forget `;` at class's end declaration.
+
+Class Name is used as Contructor for the class.
+
+Member attribute is a variable in the class declared in the public part
+Member functions is a function the class can use. I declare it with the namespace
 
