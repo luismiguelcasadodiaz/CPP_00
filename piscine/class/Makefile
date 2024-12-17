@@ -50,7 +50,8 @@ LFLGS 			= #-fsanitize=address
 
 
 SRCS_TARGET	= 	main.cpp \
-				Sample.class.cpp
+				Sample.class.cpp \
+				Sample1.class.cpp
 
 
 FILE_TARGET = $(addprefix $(SRCDIR_TARGET), $(SRCS_TARGET))

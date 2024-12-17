@@ -28,11 +28,11 @@ int main(void)
             std::cout << "buscar\n";
         else if (command == "EXIT")
         {
-                std::cout << "salir";
+                std::cout << "salir\n";
                 end = true;
         }
         else
-                std::cout << "No entendí";
+                std::cout << "No entendí \n";
     }
     return (0);
 }

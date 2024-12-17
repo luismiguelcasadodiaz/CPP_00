@@ -53,7 +53,7 @@ $>
 ```
 
 
-# cpp Piscine
+# Cpp piscine Day 00
 ## Namespaces
 
 Scope resolution operator `::`
@@ -118,7 +118,7 @@ gl_var:     [1]
 f():        [2]
 ```
 
-## iostreams
+## Iostreams
 
 Two magical objects `cin` and 'cout'
 Two new operators `<<` (back arrows or ) and `>>` (forward arrows or greater than greater than)
@@ -132,7 +132,7 @@ Two new operators `<<` (back arrows or ) and `>>` (forward arrows or greater tha
 
  [c++ iosstream reference](https://cplusplus.com/reference/iostream/)
  
- ## classes and instances
+ ## Classes and instances
 
 Do not forget `;` at class's end declaration.
 
@@ -141,3 +141,92 @@ Class Name is used as Contructor for the class.
 Member attribute is a variable in the class declared in the public part
 Member functions is a function the class can use. I declare it with the namespace
 
+## Instance constructor with **initialitation list**
+
+```cpp
+Sample1::Sample1( char p1, int p2, float p3 ): a1(p1), a2(p2), a3(p3)
+{
+    std::cout << "Constructor Sample1 called" << std::endl;
+    std::cout << "this->a1 = " << this->a1 << std::endl;
+    std::cout << "this->a2 = " << this->a2 << std::endl;
+    std::cout << "this->a3 = " << this->a3 << std::endl;
+    this->bar();
+    return ;
+
+}
+```
+
+## Const
+
+The keyword `const` declares a variable as a constant.
+
+A constant can not be assigned any value to, except at initialization time.
+
+The more constants we use in our code the safer code we will produce.
+
+Inside a class, when a member attribute is declared const, the value to such const will be defined at instantiation time, at run-time, not at compile-time.
+
+Attention to the language describing what happens during initialization list. 
+
+In `a1(p1)` we do not **assign** the value `p1` to the attribute `a1`, but we **initialize** the attribute `a1` with the value `p1`
+### const function or read-only classes.
+We must, as a good practice, add the keyword `const` after the declaration and the definition of a member function that does not modifiy any member attribute. The compiler will save us from involuntary modifications of of attributes inside member functions that do not have to modify nothing.
+
+THat good practice will help us to generate more robust code.
+
+## Visibility (public, private)
+
+Controls class's encapsulation.
+Define which member attributes and member functions are accessible from inside or outside 
+
+private, only accesible form class inside.
+public, accesible from class inside and outside
+
+constructor and destructor go in the public side.
+
+Prefix with underscore private members.
+
+The compiler will report any tentative of access from class outside to private members.
+
+It is crucial a good definition of what is visible and what is hidded to the classe user.
+
+## Class vs struct
+
+struct's syntax is a mimetic  class's syntax
+
+In C++ by default the struct' scope is public and the class' scope is private
+
+## Accessors
+
+For private attribute we create small proxy funcions to access them.
+
+We name this small proxy funcion using prefixes "get" and "set"
+
+The get proxies must be "Const".
+
+The set proxies take care of private class invariants.
+
+## Comparisons
+
+Comparisons on structures. Compares only structures addresses. if structures have same values, a regular comparison with == gives a wrong answer.
+
+Let's say == test if both structures are phisically in same memory space.
+We need a member function that test individually if any structure field differ from the
+corresponding field form other strucuture. 
+
+## Non member attributes and functions
+
+Non member attributes/functions means class attributes/functions.
+
+The member exists dans un instance. it is different for each instance.
+
+`static` has a new meaning in Cpp. we use it to declare nom member attributes/functions
+
+Instead of `this->` we use the class name to access non member attributes/functions.
+
+Non member attributes initialization takes place inside the class.cpp file
+
+## Pointers to members
+
+pointers 
+## Conclusionn
