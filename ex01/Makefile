@@ -49,8 +49,8 @@ LFLGS 			= #-fsanitize=address
 
 
 SRCS_TARGET	= 	MyAwesomePhoneBook.cpp \
-				PhoneBook.cpp \
-				Contact.cpp
+				PhoneBook.class.cpp \
+				Contact.class.cpp
 
 
 FILE_TARGET = $(addprefix $(SRCDIR_TARGET), $(SRCS_TARGET))

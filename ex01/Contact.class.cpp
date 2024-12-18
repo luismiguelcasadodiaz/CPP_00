@@ -1,30 +1,33 @@
 #include <iostream>
-#include "Contact.hpp"
+#include "Contact.class.hpp"
 
 Contact::Contact(std::string one_first_name, 
                 std::string one_last_name,
                 std::string one_nickname,
                 std::string one_phone_number,
-                std::string one_darkest_secret):
-                first_name(one_first_name), 
+                std::string one_darkest_secret): 
+                first_name(one_first_name),                 
                 last_name(one_last_name),
-                nickname(one_nickname),
-                phone_number(one_phone_number),
+                nickname(one_nickname),                
+                phone_number(one_phone_number),                
                 darkest_secret(one_darkest_secret)
-{
-    std::cout << "Contact's Constructor called" << std::endl;
+{                
+    Contact::_ordinal +=1;
+    std::cout << "Contact " << Contact::_ordinal << "'s Constructor called" << std::endl;
     return ;
 };
 
 Contact::Contact(void)
 {
-    std::cout << "Contact's Constructor called" << std::endl;
+    Contact::_ordinal +=1;
+    std::cout << "Contact " << Contact::_ordinal << "'s Constructor called" << std::endl;
     return ;
 };
 
 Contact::~Contact(void)
 {
-    std::cout << "Contact's Destructor called" << std::endl;
+    std::cout << "Contact " << Contact::_ordinal << "'s Destructor called" << std::endl;
+    Contact::_ordinal -=1;
     return ;
 }
 
@@ -83,3 +86,5 @@ std::string Contact::get_darkest_secret(void) const
 {
     return this->darkest_secret;
 }
+
+int Contact::_ordinal = 0;
