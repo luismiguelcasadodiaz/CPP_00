@@ -6,7 +6,7 @@
 #    By: luicasad <luicasad@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/30 13:07:33 by luicasad          #+#    #+#              #
-#    Updated: 2024/12/02 14:12:49 by luicasad         ###   ########.fr        #
+#    Updated: 2024/12/18 16:41:29 by luicasad         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -107,6 +107,9 @@ fclean: clean
 	rm -rf $(OBJDIR)
 
 re: fclean all
+
+run:
+	./$(TARGET)
 
 profile:
 	valgrind --tool=callgrind ./$(TARGET)

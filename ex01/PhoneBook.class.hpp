@@ -2,16 +2,17 @@
 # define PHONEBOOK_CLASS_H
 
 # include "Contact.class.hpp"
-
+# define MAX_CONTACTS 8
 class PhoneBook
 {
     public:
         PhoneBook(void);
         ~PhoneBook(void);
-        add(Contact one_contac);
-        
+        void add(Contact& one_contac);
+		void search(void) const;        
     private:
-        Contact list[8];
+        Contact list[MAX_CONTACTS];
+		int _used;
 
 };
 

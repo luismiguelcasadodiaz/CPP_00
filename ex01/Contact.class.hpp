@@ -24,6 +24,8 @@ class Contact
         std::string get_nickname(void) const;
         std::string get_phone_number(void) const;
         std::string get_darkest_secret(void) const;
+
+        std::string read_non_empty_string(const std::string prompt);
     private:
         static int _ordinal;
         std::string first_name;
@@ -31,6 +33,8 @@ class Contact
         std::string nickname;
         std::string phone_number;
         std::string darkest_secret;
+
+
 };
 
 

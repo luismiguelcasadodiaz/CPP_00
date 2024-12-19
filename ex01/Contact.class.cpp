@@ -1,6 +1,8 @@
 #include <iostream>
 #include "Contact.class.hpp"
 
+int Contact::_ordinal = 0;
+
 Contact::Contact(std::string one_first_name, 
                 std::string one_last_name,
                 std::string one_nickname,
@@ -87,4 +89,24 @@ std::string Contact::get_darkest_secret(void) const
     return this->darkest_secret;
 }
 
-int Contact::_ordinal = 0;
+std::string read_non_empty_string(const std::string prompt)
+{
+	std::string	text;
+	bool		correcto = false;
+	
+	std::cout << prompt;
+	while (not correcto)
+	{
+		std::cin >> text;
+		if (std::cin.fail())
+			std::cout << "fail" << std::endl;
+		else if (text.empty())
+			std::cout << "EMpty";
+		else
+        {
+            std::cout << "has entrado " << text << std::endl;
+            correcto = true;
+        }
+	}
+    return text ;
+}
