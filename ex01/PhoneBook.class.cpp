@@ -18,7 +18,6 @@ PhoneBook::~PhoneBook(void)
 
 void PhoneBook::add(Contact& one_contact)
 {
-    std::cout << "añadir\n";
     if (this->_index == MAX_CONTACTS)
 		this->_index = 0;
 	this->list[this->_index] = one_contact;
