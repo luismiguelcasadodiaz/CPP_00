@@ -272,5 +272,24 @@ A reference is a pointer with this characteristiques:
   int	num = 42;
   int *numptr = &num;
   inr &numref = num
-  int &numref; //invalid. you can not create a reference pointign to null.
+  int &numref2; //invalid. you can not create a reference pointign to null.
   ```
+
+A reference always point towards something. It is never null. But if what was pointed towards has been released, the reference had not the right to access to it.
+
+numref is used as it is. no need por asterisk or ampersand.
+
+## Passing parameters by reference
+
+### parameter definition inside the function
+
+std::string text = "Luis"
+
+| type | Parameter definition     |funcion call|
+|------|--------------------------|------------|
+|by ptr|f(std::string *name)      |f(&text)    |
+|by ptr|f(std::string const *name)|f(&text)    |
+|by ref|f(std::string &name)      |f(text)     |
+|by ref|f(std::string const &name)|f(text)     |
+
+### Argument passage inside the funciton 's call.
