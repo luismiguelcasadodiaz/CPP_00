@@ -120,15 +120,15 @@ void	Account::displayStatus( void ) const
 
 void	Account::_displayTimestamp( void )
 {
-	size_t		length = 15;
-	std::time_t now;
-	std::tm 	*timeinfo;
-	char		*timetext = NULL;
+	const size_t	length = 16;
+	std::time_t 	now;
+	std::tm 		*timeinfo;
+	char			timetext[length];
 
 	std::time(&now);
 	timeinfo = localtime(&now);
 	std::strftime (timetext, length, "%Y%m%d_%H%M%S", timeinfo);
-	std::cout << "[ << timetext << ]" ;
+	std::cout << "[" << timetext << "]" ;
 };
 
 Account::Account( void )
