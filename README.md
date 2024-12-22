@@ -230,3 +230,29 @@ Non member attributes initialization takes place inside the class.cpp file
 
 pointers 
 ## Conclusionn
+
+
+
+
+
+# Cpp piscine Day 01
+## New et delete
+Neither Malloc nor free form c call the class's constructor/destructor. THis is why new and delete exist in c++;
+
+new() calls first to malloc() then calls the class constructor and returns a pointer to the new created object.
+
+delete() first calls the class destructor then free().
+
+```c++
+ Student *jim = new Student("jim");
+ delete jim;
+```
+ ### Creation of an array of object
+
+ New() wiht an array does not accept any argument, so a constructor wihtout parametre must exist in the class.
+
+ ```c++
+ Students *students = new Student[42];
+ delete [] students;
+```
+Pay attention to the empty pair of square bracktes before the array of object ot destroy.
