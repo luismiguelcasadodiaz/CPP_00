@@ -255,4 +255,22 @@ delete() first calls the class destructor then free().
  Students *students = new Student[42];
  delete [] students;
 ```
-Pay attention to the empty pair of square bracktes before the array of object ot destroy.
+Pay attention to the empty pair of square bracktes before the array of object to destroy.
+
+## References
+
+A reference is a pointer with this characteristiques:
+
+
++ It is constant.
++ It is alway dereferenced.
++ it is never null.
+
+  It works like an alias to a variable
+
+  ```c++
+  int	num = 42;
+  int *numptr = &num;
+  inr &numref = num
+  int &numref; //invalid. you can not create a reference pointign to null.
+  ```
