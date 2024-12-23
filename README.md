@@ -304,8 +304,11 @@ std::string _login;
 
 ### Get a leftValue to assign somethind
 
+```c++
 obj.getLoginRef() = "newLogin";
+
 *(obj.getLoginPtr()) = "newLogin";
+```
 
 ## Filestreams
 
