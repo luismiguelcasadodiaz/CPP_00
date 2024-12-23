@@ -295,12 +295,12 @@ std::string text = "Luis"
 private:
 std::string _login;
 
-| Function's signature |    return sentence    |
-|----------------------|-----------------------|
-|std::string       &f()|return this->_login;   |
-|std::string const &f()|return this->_login;   |
-|std::string       *f()|return &(this->_login);|
-|std::string const *f()|return &(this->_login);|
+| type | Function's signature |    return sentence    |
+|------|----------------------|-----------------------|
+|by ref|std::string       &f()|return this->_login;   |
+|by ref|std::string const &f()|return this->_login;   |
+|by ptr|std::string       *f()|return &(this->_login);|
+|by ptr|std::string const *f()|return &(this->_login);|
 
 ## Filestreams
 
