@@ -281,8 +281,6 @@ numref is used as it is. no need por asterisk or ampersand.
 
 ### Passing parameters by reference
 
-#### parameter definition inside the function
-
 std::string text = "Luis"
 
 | type | Parameter definition     |funcion call|
@@ -292,8 +290,17 @@ std::string text = "Luis"
 |by ref|f(std::string &name)      |f(text)     |
 |by ref|f(std::string const &name)|f(text)     |
 
-#### Argument passage inside the funciton 's call.
+### Argument passage inside the funciton 's call.
 
+private:
+std::string _login;
+
+| Function's signature |    return sentence    |
+|----------------------|-----------------------|
+|std::string       &f()|return this->_login;   |
+|std::string const &f()|return this->_login;   |
+|std::string       *f()|return &(this->_login);|
+|std::string const *f()|return &(this->_login);|
 
 ## Filestreams
 
