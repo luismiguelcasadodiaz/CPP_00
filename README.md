@@ -283,26 +283,32 @@ numref is used as it is. no need por asterisk or ampersand.
 
 std::string text = "Luis"
 
-| type | Parameter definition     |funcion call|
-|------|--------------------------|------------|
-|by ptr|f(std::string *name)      |f(&text)    |
-|by ptr|f(std::string const *name)|f(&text)    |
-|by ref|f(std::string &name)      |f(text)     |
-|by ref|f(std::string const &name)|f(text)     |
+| type |        Parameter definition        |   funcion call  |
+|------|------------------------------------|-----------------|
+|by ptr|byPtr(std::string *name)            |byPtr(&text)     |
+|by ptr|byConstPtrf(std::string const *name)|byConstPtr(&text)|
+|by ref|byRef(std::string &name)            |byRef(text)      |
+|by ref|byConstRef(std::string const &name) |byCosntRef(text) |
 
 ### Argument passage inside the funciton 's call.
 
 private:
 std::string _login;
 
-| type | Function's signature |    return sentence    |
-|------|----------------------|-----------------------|
-|by ref|std::string       &f()|return this->_login;   |
-|by ref|std::string const &f()|return this->_login;   |
-|by ptr|std::string       *f()|return &(this->_login);|
-|by ptr|std::string const *f()|return &(this->_login);|
+| type |        Function's signature        |    return sentence    |
+|------|------------------------------------|-----------------------|
+|by ref|std::string       &getLoginRef()    |return this->_login;   |
+|by ref|std::string const &getLoginCnstRef()|return this->_login;   |
+|by ptr|std::string       *getLoginPtr()    |return &(this->_login);|
+|by ptr|std::string const getLoginCosntPtr()|return &(this->_login);|
+
+### Get a leftValue to assign somethind
+
+obj.getLoginRef() = "newLogin";
+*(obj.getLoginPtr()) = "newLogin";
 
 ## Filestreams
 
 Input file std::ifstream
+
 Output file std::ifstream
