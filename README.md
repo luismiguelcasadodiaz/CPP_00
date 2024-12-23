@@ -279,9 +279,9 @@ A reference always point towards something. It is never null. But if what was po
 
 numref is used as it is. no need por asterisk or ampersand.
 
-## Passing parameters by reference
+### Passing parameters by reference
 
-### parameter definition inside the function
+#### parameter definition inside the function
 
 std::string text = "Luis"
 
@@ -292,4 +292,10 @@ std::string text = "Luis"
 |by ref|f(std::string &name)      |f(text)     |
 |by ref|f(std::string const &name)|f(text)     |
 
-### Argument passage inside the funciton 's call.
+#### Argument passage inside the funciton 's call.
+
+
+## Filestreams
+
+Input file std::ifstream
+Output file std::ifstream
