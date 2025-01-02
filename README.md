@@ -313,5 +313,31 @@ obj.getLoginRef() = "newLogin";
 ## Filestreams
 
 Input file std::ifstream
-
 Output file std::ifstream
+
+```c++
+
+#incude <iostream>
+#include <fstream>
+
+int main(void)
+{
+ // input filestream 
+ std::ifstream ifs("numbers");//ouverture du fichier numbers
+ unsigned int dst;
+ unsigned int dst2;
+ //lecture de deux ints (il est possible de lire de pleins de manières différentes)
+ ifs >> dst >> dst2;
+ 
+ ifs.close();
+
+ std::cout << dst << " " << dst2 << std::endl;
+
+ // output filestream
+ std::ofstream ofs("test.out");
+ // Ecriture dans le fichier
+ ofs << "i like ponies" << std::endl;
+ ofs.close();
+}
+```
+
