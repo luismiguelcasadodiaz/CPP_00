@@ -228,5 +228,47 @@ Non member attributes initialization takes place inside the class.cpp file
 
 ## Pointers to members
 
+```c++
+
+#include <iostream>
+
+class Sample
+{
+	public:
+	int 	foo;
+	Sample(void) { }
+	~Sample(void) { }
+	void bar(void) const { std::cout << "BAR" << std::endl;}
+
+};
+
+int	main(void)
+{
+	Sample	instance;
+	Sample	*instancePtr = &instance;
+
+	// syntax pointer on class attribute of type int
+	int		Sample::*p = NULL; 
+	// but Which one?
+	p = &Sample::foo;
+	// but from which instance? we use operator "point-star"(.*)
+	instance.*p = 21;
+	// or the operator "arrow-star"(->*)
+	instancePtr->*p = 21;
+
+	// syntax pointer on class method of type void
+	// transpirs c suntax for pointer to functions
+	void	(Sample::*f)( void ) const;
+	// but to which method?
+	f = &Sample::bar;
+	// but from which instance? we use operator "point-star"(.*)
+	(instance.*f)();
+	// or the operator "arrow-star"(->*)
+	(instancePtr->*f)();
+
+	return (0);
+}
+```
+
 pointers 
-## Conclusionn
+## Conclusion
