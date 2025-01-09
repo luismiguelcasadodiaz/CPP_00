@@ -270,5 +270,109 @@ int	main(void)
 }
 ```
 
-pointers 
-## Conclusion
+# Cpp piscine Day 01
+## New et delete
+Neither Malloc nor free form c call the class's constructor/destructor. THis is why new and delete exist in c++;
+
+new() calls first to malloc() then calls the class constructor and returns a pointer to the new created object.
+
+delete() first calls the class destructor then free().
+
+```c++
+ Student *jim = new Student("jim");
+ delete jim;
+```
+ ### Creation of an array of object
+
+ New() wiht an array does not accept any argument, so a constructor wihtout parametre must exist in the class.
+
+ ```c++
+ Students *students = new Student[42];
+ delete [] students;
+```
+Pay attention to the empty pair of square bracktes before the array of object to destroy.
+
+## References
+
+A reference is a pointer with this characteristiques:
+
+
++ It is constant.
++ It is alway dereferenced.
++ it is never null.
+
+  It works like an alias to a variable
+
+  ```c++
+  int	num = 42;
+  int *numptr = &num;
+  inr &numref = num
+  int &numref2; //invalid. you can not create a reference pointign to null.
+  ```
+
+A reference always point towards something. It is never null. But if what was pointed towards has been released, the reference had not the right to access to it.
+
+numref is used as it is. no need por asterisk or ampersand.
+
+### Passing parameters by reference
+
+std::string text = "Luis"
+
+| type |        Parameter definition        |   funcion call  |
+|------|------------------------------------|-----------------|
+|by ptr|byPtr(std::string *name)            |byPtr(&text)     |
+|by ptr|byConstPtrf(std::string const *name)|byConstPtr(&text)|
+|by ref|byRef(std::string &name)            |byRef(text)      |
+|by ref|byConstRef(std::string const &name) |byCosntRef(text) |
+
+### Argument passage inside the funciton 's call.
+
+private:
+std::string _login;
+
+| type |        Function's signature        |    return sentence    |
+|------|------------------------------------|-----------------------|
+|by ref|std::string       &getLoginRef()    |return this->_login;   |
+|by ref|std::string const &getLoginCnstRef()|return this->_login;   |
+|by ptr|std::string       *getLoginPtr()    |return &(this->_login);|
+|by ptr|std::string const getLoginCosntPtr()|return &(this->_login);|
+
+### Get a leftValue to assign somethind
+
+```c++
+obj.getLoginRef() = "newLogin";
+
+*(obj.getLoginPtr()) = "newLogin";
+```
+
+## Filestreams
+
+Input file std::ifstream
+Output file std::ifstream
+
+```c++
+
+#incude <iostream>
+#include <fstream>
+
+int main(void)
+{
+ // input filestream 
+ std::ifstream ifs("numbers");//ouverture du fichier numbers
+ unsigned int dst;
+ unsigned int dst2;
+ //lecture de deux ints (il est possible de lire de pleins de manières différentes)
+ ifs >> dst >> dst2;
+ 
+ ifs.close();
+
+ std::cout << dst << " " << dst2 << std::endl;
+
+ // output filestream
+ std::ofstream ofs("test.out");
+ // Ecriture dans le fichier
+ ofs << "i like ponies" << std::endl;
+ ofs.close();
+}
+```
+# Cpp piscine Day 02
