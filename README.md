@@ -282,7 +282,7 @@ delete() first calls the class destructor then free().
  Student *jim = new Student("jim");
  delete jim;
 ```
- ### Creation of an array of object
+### Creation of an array of object
 
  New() wiht an array does not accept any argument, so a constructor wihtout parametre must exist in the class.
 
@@ -376,3 +376,64 @@ int main(void)
 }
 ```
 # Cpp piscine Day 02
+
+## Ad-hoc Polymorphism / Surcharge de fonctions
+
+We define several functions sharing same name but with different parameters:
+
+```c++
+
+class Sample {
+    public:
+        Sample ( void );
+        ~Sample ( void );
+
+        void foo ( char const c) const;
+        void foo ( int const n) const;
+        void foo ( float const z) const;
+        void foo ( Sample  const & i) const;
+
+};
+```
+
+## Operator Overload
+
+c++ has a syntasis to increase operators funcionality.
+
+Notations
+
+Infix : 1 + 1
+Prefix: + 1 1 or functional notation +(1 1)
+Postfix: 1 1 +
+
+1.+( 1 ) 
+Instance that call a function member (operator plus) wiht one argument.
+
+```c++
+class Integer {
+    public:
+        Integer ( int const n );  //constructor
+        ~Integer ( void ) ;      //destructor
+
+        int getValue ( void ) const ; //accessor;
+
+        Integer & operator=( Integer const & rhs );  //asignation op. overload
+        Integer   operator+( Integer const & rhs ) const;  //addition op. overload
+        // rhs stands for right hand side.
+        // lhs stands for left hadn side. it is hidden at declaration but is "this->" in the implementation.
+
+    private:
+         int _n;
+};
+```
+Special keyword **operator** transforms a simple declaration of a class member function into an operator overload.
+
+There are unary, binary and ternary operators. Last one are not overloadble.
+The number or parameters has to agree the operator arity.
+
+Remember that c++ implicitly pass to each function member an instance of the current class
+
+Especial attention to operator pre-increment and post increment.
+
+## Cannonical form
+
