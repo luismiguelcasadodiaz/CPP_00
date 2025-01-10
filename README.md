@@ -425,15 +425,155 @@ class Integer {
     private:
          int _n;
 };
+
+std::ostream & operator<<( std::ostream & os, Integer const & rhs);
 ```
 Special keyword **operator** transforms a simple declaration of a class member function into an operator overload.
 
-There are unary, binary and ternary operators. Last one are not overloadble.
+There are unary, binary and ternary operators. Last ones are not overloadble.
 The number or parameters has to agree the operator arity.
 
 Remember that c++ implicitly pass to each function member an instance of the current class
 
 Especial attention to operator pre-increment and post increment.
 
-## Cannonical form
+### asignation
 
+As there is a change of the lhs, we do not use ``` const ```
+```c++
+        Integer & operator=( Integer const & rhs );  //asignation op. overload
+```
+
+we return a reference to the current class cause in c++ a multiple assignation is possible
+
+```c++
+        a = b = c = d;
+```
+
+```c++
+        Integer & Integer::operator=( Integer const & rhs )  //asignation op. overload
+		{
+			this->_n = rhs.getValue();
+			return *this;  //dereference the pointer to get the reference
+		}
+```
+
+### addition
+
+No addition operand is modified, so we use  ``` const ```
+
+
+```c++
+        Integer  operator+( Integer const & rhs ) const;  //asignation op. overload
+```
+
+we return a copy of the result. 1 + 2 + 3 + 4, no matter how we use parentesis, returns same value.
+
+```c++
+        Integer  Integer::operator+( Integer const & rhs ) const //asignation op. overload
+		{
+			
+			return Integer( this->_n + rhs.getValue() ); //new instance created
+		}
+```
+
+It is not the most memory usage efficient. we create a copy. With a local declararion of a pointer would not possible return the adittion. ???? to investigate.
+
+### stream extraction and insertion operators
+
+Since they take the user-defined type as the right argument (b in a @ b), they must be implemented **as non-members**.
+```c++
+std::ostream& operator<<(std::ostream& os, const T& obj)
+{
+    // write obj to stream
+    return os;
+}
+ 
+std::istream& operator>>(std::istream& is, T& obj)
+{
+    // read obj from stream
+    if (/* T could not be constructed */)
+        is.setstate(std::ios::failbit);
+    return is;
+}
+```
+
+In our example 
+
+```c++
+std::ostream & operator<<( std::ostream & os, Integer const & rhs)
+{
+	os << rhs.getValue();
+	return os;  // it is already a parameter **reference**
+}
+```
+### usage
+
+```c++
+int main()
+{
+	Integer x( 30 );
+	Integer y( 10 );
+	Integer y( 0 );
+
+	y = Integer( 12 );
+	z = x + y;
+	return 0;
+}
+```
+
+### Overload rules
+
++ Must be natural. if it 
++ Overload must be related to operator semantic.
++ Do not do it. There are few cases where a operator overload is required.
+
+## Cannonical form of a class
+
+It is a way to construct class with a minimal interface that allows a uniform treatment/contract of/with classes. the class must have:
+
++ Constructor by default. Sample( void ); it can be private.
++ Constructor by copy. Sample( Sample const & src );
++ Operator assignation. Sample & operator=( Sample const & rhs );
++ A destructor. ~Sample( void ); 
+
+If our class has this four elements, we can say the class is in a canonical form.
+
+The destructor must be virtual. I will learn this later.
+
+#### Constructor by copy.
+```c++
+Sample( Sample const & src );
+
+Sample::Sample( Sample const & src){
+	*this = src;
+	return;
+}
+```
+The argument is an instance of the class to make a copy of it. Has const cause src will not change inside.
+
+#### Operator assignation.
+```c++
+Sample & operator=( Sample const & rhs );
+
+Sample & operator=( Sample const & rhs ){
+	if (this != &rhs )
+		this->_foo = rhs.getFoo();
+	return *this;
+}
+
+
+```
+It is quite similar to the constructor by copy. There, we get a new instance. Here we get an instance actualization.
+
+#### Usage
+```c++
+int main () 
+{
+	Sample instance1;
+	Sample instance2( 42 );
+	Sample instance3( instance1 )
+
+	instance3 = instance2;
+	return 0;
+}
