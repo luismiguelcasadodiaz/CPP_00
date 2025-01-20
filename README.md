@@ -577,3 +577,248 @@ int main ()
 	instance3 = instance2;
 	return 0;
 }
+```
+
+# Cpp piscine Day 03
+
+One class inherits form another with " colon public motherClass".
+
+Child can call mother's constructor. 
+Child does not requires call mother's destructor. it is implicitly done.
+Child can call public/protectd mother's member functions or mother's attributes.
+
+```c++
+class A {
+public:
+  A(int x) { std::cout << "A's constructor called with x = " << x <<std::endl; }
+  ~A() { std::cout << "A's destructor called" << std::endl; }
+  void myFunction() {std::cout << "A's myFunction() called" << std::endl;  }
+  int public_data = 10; 
+};
+
+class B : public A {
+public:
+  B(int x) : A(x) {     std::cout << "B's constructor called" << std::endl;   }
+  ~B() { std::cout << "B's destructor called" << std::endl; }
+  void callAFunction() {myFunction(); public_data +=1;}// Directly call A's myFunction()
+  void access_base_class_members() {
+    std::cout << "public_data from A: " << public_data << std::endl; 
+    public_function(); 
+  }
+};
+
+```
+
+The child class can redefine a motherclass' function member. Only requires a new function member with the same signature. This is called **method overriding or function overriding**.
+
+```c++
+class Animal {
+public:
+    void makeSound() {
+        cout << "Generic animal sound" << endl;
+    }
+};
+
+// Derived class (Child class)
+class Dog : public Animal {
+public:
+    void makeSound() { // Redefines makeSound() from the base class
+        cout << "Woof!" << endl;
+    }
+};
+
+```
+
+A pointer of type Animal* is created and assigned the address of the Dog object.
+When animalPtr->makeSound() is called, the makeSound() method of the Dog class is executed, demonstrating polymorphism. 
+This happens because the compiler determines the actual type of the object being pointed to at runtime.
+```c++
+int main() {
+    Animal animal;
+    animal.makeSound(); // Output: Generic animal sound
+
+    Dog dog;
+    dog.makeSound(); // Output: Woof!
+
+    // Polymorphism: Using a base class pointer to refer to a derived class object
+    Animal* animalPtr = &dog; 
+    animalPtr->makeSound(); // Output: Woof! (Method of the derived class is called)
+
+    return 0;
+}
+```
+
+
+
+
+# Cpp piscine Day 04
+
+### The compiler trust the programmer .....
+
+In this example, b-warrior is defined as character, so the compiler executes the Character's sayHello() function member when we invoke the sayHello() member function of the warrior.
+``` c++
+class Character{
+	public: 
+		void sayHello();
+}
+class Warrior : public Character {
+	public:
+		void sayHello();
+}
+
+void Character::sayHello () {
+	std::cout << "Character Hello " << std::endl;
+}
+
+void Warrior::sayHello () {
+	std::cout << "Warrior Hello " << std::endl;
+}
+int main()
+	Warrior* 	a= new Warrior();
+	Character*	b = new Warrior() //OK cause Warrior inherits from Character
+	Warrior* 	c = new Character() //KO. 
+	//Although they ARE related (a warrior IS-A Character), the reverse in untrue, 
+	// a character not always is a warrior)
+
+	a->sayHello();//>>Warrior Hello
+	b->sayHello();//>>Character Hello
+```
+
+we require the keyword **virtual** to override such behaviour.  Virtual makes a dynamic linkages instead the static linkage from this previous case.
+
+In this previous case , at compiling time the b type is defined as character. it can not change later, so b->sayHello() prints a Character's hello.
+
+Virtual instruct the compiler to dig in the heritage process to find the real method that to executed.
+
+## Clases Abstractes
+
+
+
+
+
+
+
+
+
+
+
+
+# Additional Material 
+
+## Subtype Polymorfism (runtime polymorfism)
+It's the ability to use derived classes through base class pointers and references.
+
+All of Felidae biological family, and they all should be able to meow, they can be represented as classes inheriting from **Felid base class** and **overriding** the meow **pure virtual function**.
+
+Main program can use Cat, Tiger and Ocelot interchangeably through Felid (base class) pointer.
+
+```c++
+class Felid {
+public:
+ virtual void meow() = 0;
+};
+
+class Cat : public Felid {
+public:
+ void meow() { std::cout << "Meowing like a regular cat! meow!\n"; }
+};
+
+class Tiger : public Felid {
+public:
+ void meow() { std::cout << "Meowing like a tiger! MREOWWW!\n"; }
+};
+
+class Ocelot : public Felid {
+public:
+ void meow() { std::cout << "Meowing like an ocelot! mews!\n"; }
+};
+
+void do_meowing(Felid *cat) {
+ cat->meow();
+}
+
+int main() {
+ Cat cat;
+ Tiger tiger;
+ Ocelot ocelot;
+
+ do_meowing(&cat);
+ do_meowing(&tiger);
+ do_meowing(&ocelot);
+}
+```
+Subtype polymorphism is also called runtime polymorphism for a good reason. The resolution of polymorphic function calls happens at runtime through an indirection **via the virtual table**. Another way of explaining this is that compiler does not locate the address of the function to be called at compile-time, instead when the program is run, the function is called by dereferencing the right pointer in the virtual table.
+
+In type theory it's also known as inclusion polymorphism.
+
+## Parametric polymorphism (compile-time polymorphins)
+In C++ parametric polymorphism is implemented via templates. It happens at compile time.
+
+Parametric polymorphism provides a means to execute the same code for any type. One of the simplest examples is a generic max function that finds maximum of two of its arguments.
+
+
+```c++
+template <class T>
+T max(T a, T b) {
+ return a > b ? a : b;
+}
+
+int main() {
+ std::cout << ::max(9, 5) << std::endl;     // 9
+
+ std::string foo("foo"), bar("bar");
+ std::cout << ::max(foo, bar) << std::endl; // "foo"
+}
+```
+
+## Ad-hoc polymorphism (oveloading)
+
+Ad-hoc polymorphism allows functions with the same name act differently for each type. For example, given two ints and the + operator, it adds them together. Given two std::strings it concatenates them together. This is called overloading.
+
+Here is a concrete example that implements function add for ints and strings,
+
+```c++
+#include <iostream>
+#include <string>
+
+int add(int a, int b) {
+ return a + b;
+}
+
+std::string add(const char *a, const char *b) {
+ std::string result(a);
+ result += b;
+ return result;
+}
+
+int main() {
+ std::cout << add(5, 9) << std::endl;
+ std::cout << add("hello ", "world") << std::endl;
+}
+```
+
+
+## Coercion polymorphism (Casting)
+
+Coercion happens when an object or a primitive is cast into another object type or primitive type. 
+
+There is implicit coercion.
+
+```c++
+float b = 6; // int gets promoted (cast) to float implicitly
+int a = 9.99 // float gets demoted to int implicitly
+```
+There is c explicit coercion.
+
+```c
+a =(int)b;
+```
+
+There is c++ explicit coercion.
+```c++
+static_cast, const_cast, reinterpret_cast, or dynamic_cast.
+```
+
+
+# what i read
+[The Four Polymorphisms in C++](https://catonmat.net/cpp-polymorphism)
