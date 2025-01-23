@@ -700,8 +700,99 @@ Virtual instruct the compiler to dig in the heritage process to find the real me
 
 
 
+## clases imbriques
+It is de definition of a class inside a class
+```c++
+class Cat
+{
+  public:
+    Cat(void);
+    virtual ~Cat(void);
+
+    class Leg
+    {
+      Leg(void);
+      virtual ~Leg(void);
+      //
+    };
+};
+
+int main(void)
+{
+  Cat somecat();
+  Cat::Leg someleg();
+
+  return (0);
+}
+```
+## Exception
+
+One exception is a technique to send a message in the stack's call to funcitions.
+
+Inside a **try** block, when my code detects an error, it **throws** an exception. Then, execution flow exits current scope till first **catch** block.
+
+```c++
+#include <stdexcept>
+
+try 
+{
+ //do somethin here
+ if (/**/){
+	throw std::exception();
+ } else {
+	test3();
+ }
+}
+catch (CustomerException &e)
+{
+ // Handle error
+}
+catch (std::exception &e)
+{
+ // Handle other error differently
+}
+// Allow to catch any type of exception
+catch (...)
+{
+ //...
+}
+```
 
 
+### custom exceptions
+```c++
+class CustomException: public std::exception
+{
+ public:
+  virtual const char * what() const throw()
+  {
+     return "Error";
+  }
+};
+```
+
+### example
+```c++
+#include <iostream>
+#include <stdexcept>
+
+int divide(int a, int b) {
+    if (b == 0) {
+        throw std::runtime_error("Division by zero!"); 
+    }
+    return a / b;
+}
+
+int main() {
+    try {
+        int result = divide(10, 0); 
+        std::cout << "Result: " << result << std::endl; 
+    } catch (const std::runtime_error& e) { 
+        std::cerr << "Error: " << e.what() << std::endl; 
+    }
+    return 0;
+}
+```
 
 # Additional Material 
 
