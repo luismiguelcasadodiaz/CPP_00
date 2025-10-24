@@ -892,6 +892,7 @@ int main() {
 ## Coercion polymorphism (Casting)
 
 Coercion happens when an object or a primitive is cast into another object type or primitive type. 
+It differs from type promotion (int to double) or type demotion (double to int).
 
 There is implicit coercion.
 
@@ -899,7 +900,7 @@ There is implicit coercion.
 float b = 6; // int gets promoted (cast) to float implicitly
 int a = 9.99 // float gets demoted to int implicitly
 ```
-There is c explicit coercion.
+There is c explicit coercion. Good practice avoids this in c++.
 
 ```c
 a =(int)b;
@@ -909,7 +910,58 @@ There is c++ explicit coercion.
 ```c++
 static_cast, const_cast, reinterpret_cast, or dynamic_cast.
 ```
+### static_cast<int>
+Double d =42 ;
+int i = static_cast<int>(d) ; // Explicit demotion
+
+#### static_cast with classes belonging to same inheritance tree. 
+```c++
+class Parent {};
+class Child_1: public Parent {} ;
+class Child_2: public Parent {} ;
+
+class Unrelated {};
+
+Child_1 = a;
+Parent * p = &a;                                   // Implicit upcast from child to parent
+Child_1 * c1 = p;                                  // Implicit dowcast from Parent to Child_1 : KO
+Child_2 * c2 = static_cast<Child_2 *>(p) ;         // Explicit downcast from Parent to Child_2: OK
+Unrelated * u = static_cast<Unrelated *>(&a) :     // Explicit downcast from Parent to Child_2: KO Unrelated clases
+```
+### dynamic_cast
+It is the unique cast taking place at runtime. 
+Requires error protection.
+Only works with polymorphism having an virtual member in the class with a virtual method.
+
+```c++
+class Parent {public: virtual ~Parent( void ) {} };
+class Child_1: public Parent {} ;
+class Child_2: public Parent {} ;
+
+//the virtual method creates a vtable RTTI (Runtime Type info) . It is information about types saved internally in the class. It allows the dynamic cast to verify it is feasible.
 
 
+Child_1 = a;
+Parent * p = &a;                                   // Implicit upcast from child to parent
+
+// Explicit Downcast by pointer
+Child_1 * c1 = dynamic_cast,Child_1 *>(p);
+if ( c == NULL ) {
+	std::cout << "Conversion is NOT OK" << std::endl ;
+} else {
+	std::cout << "Conversion is OK << std::endl ;
+}
+
+// Explicit Downcast by reference
+try {
+} catch (std::bad_cast &bc) {
+	std::cout << "Conversion is NOT OK << bc.what() << std::endl;
+	return 0 ;
+}  
+```
+
+      // Implicit dowcast from Parent to Child_1 : KO
+Child_2 * c2 = static_cast<Child_2 *>(p) ;         // Explicit downcast from Parent to Child_2: OK
+Unrelated * u = static_cast<Unrelated *>(&a) :     // Explicit downcast from Parent to Child_2: KO Unrelated clases
 # what i read
 [The Four Polymorphisms in C++](https://catonmat.net/cpp-polymorphism)
