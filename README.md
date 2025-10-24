@@ -987,6 +987,8 @@ int * d = const_cast<int *>(b) //Explicit demotior possible from const integer t
 ```
 using const_cast is a sing of bad designed code.
 
+### operator cast
+
 
 # what i read
 [The Four Polymorphisms in C++](https://catonmat.net/cpp-polymorphism)
