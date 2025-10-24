@@ -931,37 +931,41 @@ Unrelated * u = static_cast<Unrelated *>(&a) :     // Explicit downcast from Par
 ### dynamic_cast
 It is the unique cast taking place at runtime. 
 Requires error protection.
-Only works with polymorphism having an virtual member in the class with a virtual method.
+Only works with polymorphism having a virtual member in the class with a virtual method.
 
 ```c++
 class Parent {public: virtual ~Parent( void ) {} };
 class Child_1: public Parent {} ;
 class Child_2: public Parent {} ;
 
-//the virtual method creates a vtable RTTI (Runtime Type info) . It is information about types saved internally in the class. It allows the dynamic cast to verify it is feasible.
+//the virtual method creates a vtable RTTI (Runtime Type information). It is information about the types saved internally in the class. It allows the dynamic cast to verify if it is feasible.
 
 
 Child_1 = a;
 Parent * p = &a;                                   // Implicit upcast from child to parent
 
 // Explicit Downcast by pointer
-Child_1 * c1 = dynamic_cast,Child_1 *>(p);
+Child_1 * c1 = dynamic_cast<Child_1 *>(p);
 if ( c == NULL ) {
 	std::cout << "Conversion is NOT OK" << std::endl ;
 } else {
-	std::cout << "Conversion is OK << std::endl ;
+	std::cout << "Conversion is OK << std::endl ;   // it work cause real type hide behind P is Child 1.
 }
 
 // Explicit Downcast by reference
 try {
+	Child_2 & c2 = static_cast<Child_2 &>(*p)    //la referencia no puede devolve un puntero nulo
+	std::cout << "Conversion is OK  << std::endl;
 } catch (std::bad_cast &bc) {
 	std::cout << "Conversion is NOT OK << bc.what() << std::endl;
+		// p points to Child1 and i want to downcasted it to Child 2. Child 2 is not the real type behind p.
+		// Crash
 	return 0 ;
 }  
 ```
+Dynamic_cast is used for runtime installations plugins. developer works with an abstract class that becomes concrete at runtime. Dunamic cast helps us to detect type of plugi.
 
-      // Implicit dowcast from Parent to Child_1 : KO
-Child_2 * c2 = static_cast<Child_2 *>(p) ;         // Explicit downcast from Parent to Child_2: OK
-Unrelated * u = static_cast<Unrelated *>(&a) :     // Explicit downcast from Parent to Child_2: KO Unrelated clases
+
+
 # what i read
 [The Four Polymorphisms in C++](https://catonmat.net/cpp-polymorphism)
