@@ -965,6 +965,27 @@ try {
 ```
 Dynamic_cast is used for runtime installations plugins. developer works with an abstract class that becomes concrete at runtime. Dunamic cast helps us to detect type of plugi.
 
+### reinterpret_cast
+It is the most permissible cast method
+
+```c++
+float a = 420.042f ;
+void * b = &a ;  //implicit Promotion
+int * intp = reintrepret_cast<int *>(b) //Explicit demotion from float to int
+int & intr = reintrepret_cast<int &>(b) //Explicit demotion
+```
+this cast allows reintrepret a buffer of data
+
+### const_cast
+Allows to change type califier.
+
+```c++
+int a = 42;
+int const * b = &a ;
+int * c = b ; //implicit demotion not possible from const integer to mutable integer.
+int * d = const_cast<int *>(b) //Explicit demotior possible from const integer to mutable integer.
+```
+using const_cast is a sing of bad designed code.
 
 
 # what i read
