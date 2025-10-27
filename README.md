@@ -1074,5 +1074,76 @@ int main (void)
 	return 0 ;
 }
 ```
+
+
+### Template Specialization
+We have partial and full class specialization according to the freedon degrees we keep in or template definition```.
+
+```c++
+template<typename T, typename U>
+class Pair {
+public:
+	Pair<T, U>(T const & lhs, U const & rhs) : _lhs(lhs), _Rhs( rhs) 
+	{
+		std::cout << "Generic template" << std::endl ;
+		return ;
+	}
+
+	~Pair<T, U>( void) { }
+	T const & fst( void ) const { return this->_rhs ; }
+	U const & snd( void ) const { return this->_rhs ; }
+private:
+	T const & _jhs ;
+	U const & _rhs ;
+	} ;
+```
+we slightly change the template syntax for the specialization partial. IN this case is is a Int specializatin.
+```c++
+template<typename U>
+class Pair<int, U> {
+public:
+	Pair<int, U>(int const & lhs, U const & rhs) : _lhs(lhs), _Rhs( rhs) 
+	{
+		std::cout << "Generic template" << std::endl ;
+		return ;
+	}
+
+	~Pair<int, U>( void) { }
+	int const & fst( void ) const { return this->_rhs ; }
+	U const & snd( void ) const { return this->_rhs ; }
+private:
+	int const & _jhs ;
+	U const & _rhs ;
+	} ;
+```
+ full specialitaion we define both typename. To show better the full specializations let's save 2 bools inside one integer.
+```c++
+template<>
+class Pair<bool, bool> {
+public:
+	Pair<bool, bool>(bool lhs, bool rhs) : _lhs(lhs), _Rhs( rhs) 
+	{
+		std::cout << "Generic template" << std::endl ;
+		this->_n = 0;
+		this->_n |= static_cast<int>(lhs) << 0 ;
+	    this->_n |= static_cast<int>(rhs) << 1 ;
+		return ;
+	}
+
+	~Pair<bool, bool>( void) { }
+	bool fst( void ) const { return this->_rhs ; }
+	bool snd( void ) const { return this->_rhs ; }
+private:
+	int  _n ;
+	Pair<bool, bool>( void) { }
+	} ;
+```
+
+template<typename T, typename U>
+std::ostream & operator<<(std::ostream & o, pair<T,U> const & p)
+{
+	o << "Pair( " <<p.fst() << ", " << p.snd() << " )";
+}
+
 # what i read
 [The Four Polymorphisms in C++](https://catonmat.net/cpp-polymorphism)
