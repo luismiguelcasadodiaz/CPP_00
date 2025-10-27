@@ -989,6 +989,90 @@ using const_cast is a sing of bad designed code.
 
 ### operator cast
 
+## Templates
+Templates for structs, functions, and classes.
+Templates are models o receipts for the compiler write code for us 
 
+It allows the instantiation of the templates with the types we need each time.
+We can instantiate implicit or explicitment.
+
+```c++
+template<typename T>  // Function template
+T const & max (T const & a, T const & b)
+{
+	return (a > b ? a : b)
+}
+
+int foo ( int x ) {
+	std::cout << "Long computing time" << std::endl;
+	return x;
+}
+
+int main ( void )
+{
+	int a = 12 ;
+	int b = 24 ;
+	std::cout << "Max of " << a << " and " << b << " is " ;
+	std::cout << max<int>(a, b) << std::endl;   //Explicit instantiaton ;
+	std::cout << "Max of " << a << " and " << b << " is " ;
+	std::cout << max(a, b) << std::endl;   //Implicit instantiaton. The compiler infers from the arguments
+
+	float c = 12.5 ;
+	float d = 12.7 ;
+	std::cout << "Max of " << c << " and " << d << " is " ;
+	std::cout << max<float>(c, d) << std::endl;   //Explicit instantiaton ;
+	std::cout << "Max of " << c << " and " << d << " is " ;
+	std::cout << max(c, d) << std::endl;   //Implicit instantiaton. The compiler infers from the arguments
+
+	char e = 'a' ;
+	char f = 'b' ;
+	std::cout << "Max of " << e << " and " << f << " is " ;
+	std::cout << max<float>(e, f) << std::endl;   //Explicit instantiaton ;
+	std::cout << "Max of " << e << " and " << f << " is " ;
+	std::cout << max(e, f) << std::endl;   //Implicit instantiaton. The compiler infers from the arguments
+
+
+	int ret = max<int>( foo(a), foo(b) );
+	std::cout << "Max of " << a << " and " << b << " is " ;
+	std::cout << ret << std::endl;   //Explicit instantiaton ;
+return 0 ;
+}
+````
+
+### class templates
+
+class list functions equally no matter which type the list is.
+```c++
+template<typename T>
+class list
+{
+	public:
+		list<T>( void ){}
+		~list<T>( void ){}
+		list<T>( T const & content ){}
+	private:
+		T       * _content;
+		list<T> * _next;
+};
+template<typename T, typename U>
+class list2
+{
+	public:
+		list<T>( void ){}
+		~list<T>( void ){}
+		list<T>( T const & content ){}
+	private:
+		T       * _content;
+		list<T> * _next;
+};
+int main (void)
+{
+	list<int>		a( 43 );
+	list<float> 	f( 3.14f );
+	list<list<int>> ll( a ) ;
+	list2<int, float> ; /template wiht two typenames.
+	return 0 ;
+}
+```
 # what i read
 [The Four Polymorphisms in C++](https://catonmat.net/cpp-polymorphism)
