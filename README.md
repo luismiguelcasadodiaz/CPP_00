@@ -991,10 +991,10 @@ using const_cast is a sing of bad designed code.
 
 ## Templates
 Templates for structs, functions, and classes.
-Templates are models o receipts for the compiler write code for us 
+Templates are models or receipts for the compiler to write code for us. 
 
 It allows the instantiation of the templates with the types we need each time.
-We can instantiate implicit or explicitment.
+We can instantiate implicitment or explicitment.
 
 ```c++
 template<typename T>  // Function template
@@ -1077,7 +1077,7 @@ int main (void)
 
 
 ### Template Specialization
-We have partial and full class specialization according to the freedon degrees we keep in or template definition```.
+We have partial and full class specialization according to the freedom degrees we keep in our template's definition.
 
 ```c++
 template<typename T, typename U>
@@ -1097,7 +1097,7 @@ private:
 	U const & _rhs ;
 	} ;
 ```
-we slightly change the template syntax for the specialization partial. IN this case is is a Int specializatin.
+We slightly modify the template syntax for the partial specialization. In this case, it is an Int specialization.
 ```c++
 template<typename U>
 class Pair<int, U> {
@@ -1116,7 +1116,8 @@ private:
 	U const & _rhs ;
 	} ;
 ```
- full specialitaion we define both typename. To show better the full specializations let's save 2 bools inside one integer.
+
+Full specialitation we define both typename. for showing better the full specialization, let's save 2 bools inside one integer.
 ```c++
 template<>
 class Pair<bool, bool> {
@@ -1144,6 +1145,77 @@ std::ostream & operator<<(std::ostream & o, pair<T,U> const & p)
 {
 	o << "Pair( " <<p.fst() << ", " << p.snd() << " )";
 }
+
+# STL
+## containers c++98
+### sequence containers
+#### 1.- vector
+A vector is a dynamic array allowing fast insertion/deletion at end.
+#### 2.- deque 
+Double-ended queue allows fast insertion/deletion at both ends
+
+#### 3.- list
+Double-linked list allowing fast insertion/deletion anywhere.
+```c++
+std::list<int> lst1;  // defines a list of integers
+
+
+std::list<int>::const_iterator it //An iterator is the equivalent of a pointer.
+std::list<int>::const_iterator ite = lst1.end() // lst1.end() is not the last element. It is a value means we passed the last element.
+for ( it = list.begin(); it != ite ; ++it)
+{	std::cout << *it << std::endl;    // you can dereference an iterator
+}
+```
+### Associative Containers
+#### 4.- set
+Keeps unique sorted elements
+#### 5.- multiset
+Keeps duplicated sorted elements
+#### 6.- map
+keeps key-value pairs. Each key is unique. Keys are sorted.
+#### 7.- multimap
+keeps key-value pairs. Allows duplicate keys. Keys are sorted.
+
+### Container Adapters
+#### 8.-Stack
+LIFO
+#### 9.-queue
+FIFO
+#### 10.- priority_queue
+Heap_based it is stored compactly in an array. Always know the highrs priority element
+### Special Containers
+#### 11.- bitset
+Keeps a fized-size sequence of bits
+
+### maps
+a dictionary whose key can be whatever
+
+
+## Algortims
+
+It is a group of functions that operate over a collection;
+
+### for each
+
+```c++
+void displayInt(int i)
+{
+	std::cout << i << std::endl;
+}
+int main ()
+{
+	std::list<int> lst;
+	lst.push_back(10);
+	lst.push_back(23);
+	lst.push_back(3);
+	lst.push_back(17);
+	lst.push_back(20);
+	for_each(lst.begin(), lst.end(), displayInt)
+	return (0);
+}
+```
+
+
 
 # what i read
 [The Four Polymorphisms in C++](https://catonmat.net/cpp-polymorphism)
