@@ -1203,18 +1203,18 @@ It is a group of functions that operate over a collection. In std=c++98 there ar
 #### Iterating:
 for_each        // Apply function to each element in range
 ####  Searching/Finding:
-find            // Find first occurrence of value
-find_if         // Find first element satisfying predicate
-find_end        // Find last occurrence of subsequence
-find_first_of   // Find first occurrence of any element from set
-adjacent_find   // Find first pair of adjacent equal elements
++ find            // Find first occurrence of value
++ find_if         // Find first element satisfying predicate
++ find_end        // Find last occurrence of subsequence
++ find_first_of   // Find first occurrence of any element from set
++ adjacent_find   // Find first pair of adjacent equal elements
 ####  Counting:
-count           // Count occurrences of value
-count_if        // Count elements satisfying predicate
++ count           // Count occurrences of value
++ count_if        // Count elements satisfying predicate
 ####  Comparison:
-equal           // Check if two ranges are equal
-mismatch        // Find first position where ranges differ
-lexicographical_compare  // Lexicographic comparison of ranges
++ equal           // Check if two ranges are equal
++ mismatch        // Find first position where ranges differ
++ lexicographical_compare  // Lexicographic comparison of ranges
 #### Searching (continued):
 search          // Search for subsequence
 search_n        // Search for n consecutive occurrences
@@ -1233,22 +1233,22 @@ replace_if      // Replace values satisfying predicate
 replace_copy    // Copy range with replacements
 replace_copy_if // Copy range with conditional replacements
 #### Filling:
-fill            // Fill range with value
-fill_n          // Fill n elements with value
-generate        // Fill range using generator function
-generate_n      // Fill n elements using generator
++ fill            // Fill range with value
++ fill_n          // Fill n elements with value
++ generate        // Fill range using generator function
++ generate_n      // Fill n elements using generator
 #### Removing:
-remove          // Remove values (doesn't actually erase, returns new end)
-remove_if       // Remove values satisfying predicate
-remove_copy     // Copy range excluding values
-remove_copy_if  // Copy range excluding values satisfying predicate
-unique          // Remove consecutive duplicates
-unique_copy     // Copy range removing consecutive duplicates
++ remove          // Remove values (doesn't actually erase, returns new end)
++ remove_if       // Remove values satisfying predicate
++ remove_copy     // Copy range excluding values
++ remove_copy_if  // Copy range excluding values satisfying predicate
++ unique          // Remove consecutive duplicates
++ unique_copy     // Copy range removing consecutive duplicates
 #### Reversing/Rotating:
-reverse         // Reverse range
-reverse_copy    // Copy reversed range
-rotate          // Rotate elements left
-rotate_copy     // Copy rotated range
++ reverse         // Reverse range
++ reverse_copy    // Copy reversed range
++ rotate          // Rotate elements left
++ rotate_copy     // Copy rotated range
 #### Randomly shuffling:
 random_shuffle  // Randomly shuffle elements
 #### Partitioning:
