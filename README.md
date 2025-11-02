@@ -1190,18 +1190,113 @@ LIFO
 #### 9.-queue
 FIFO
 #### 10.- priority_queue
-Heap_based it is stored compactly in an array. Always know the highrs priority element
+Heap_based it is stored compactly in an array. Always know the highers priority element
 ### Special Containers
 #### 11.- bitset
 Keeps a fized-size sequence of bits
 
-### maps
-a dictionary whose key can be whatever
-
-
 ## Algortims
 
-It is a group of functions that operate over a collection;
+It is a group of functions that operate over a collection. In std=c++98 there are 71. C++23 has roughly 2.5-3x more algorithms. c++26 plans 10..15 more.
+
+### Non-Modifying Sequence Operations
+#### Iterating:
+for_each        // Apply function to each element in range
+####  Searching/Finding:
+find            // Find first occurrence of value
+find_if         // Find first element satisfying predicate
+find_end        // Find last occurrence of subsequence
+find_first_of   // Find first occurrence of any element from set
+adjacent_find   // Find first pair of adjacent equal elements
+####  Counting:
+count           // Count occurrences of value
+count_if        // Count elements satisfying predicate
+####  Comparison:
+equal           // Check if two ranges are equal
+mismatch        // Find first position where ranges differ
+lexicographical_compare  // Lexicographic comparison of ranges
+#### Searching (continued):
+search          // Search for subsequence
+search_n        // Search for n consecutive occurrences
+### Modifying Sequence Operations
+#### Copying:
+copy            // Copy range
+copy_backward   // Copy range backwards
+#### Swapping:
+swap            // Swap two values
+swap_ranges     // Swap two ranges
+iter_swap       // Swap values pointed by iterators
+#### Transforming:
+transform       // Apply function to range and store results
+replace         // Replace values
+replace_if      // Replace values satisfying predicate
+replace_copy    // Copy range with replacements
+replace_copy_if // Copy range with conditional replacements
+#### Filling:
+fill            // Fill range with value
+fill_n          // Fill n elements with value
+generate        // Fill range using generator function
+generate_n      // Fill n elements using generator
+#### Removing:
+remove          // Remove values (doesn't actually erase, returns new end)
+remove_if       // Remove values satisfying predicate
+remove_copy     // Copy range excluding values
+remove_copy_if  // Copy range excluding values satisfying predicate
+unique          // Remove consecutive duplicates
+unique_copy     // Copy range removing consecutive duplicates
+#### Reversing/Rotating:
+reverse         // Reverse range
+reverse_copy    // Copy reversed range
+rotate          // Rotate elements left
+rotate_copy     // Copy rotated range
+#### Randomly shuffling:
+random_shuffle  // Randomly shuffle elements
+#### Partitioning:
+partition       // Partition range by predicate
+stable_partition // Stable partition by predicate
+### Sorting Operations
+#### Sorting:
+sort            // Sort range (typically quicksort/introsort)
+stable_sort     // Stable sort (preserves relative order of equal elements)
+partial_sort    // Partially sort range (first N elements sorted)
+partial_sort_copy // Copy partially sorted range
+#### Nth element:
+nth_element     // Partition around nth element (nth element in correct position)
+### Binary Search Operations (require sorted ranges)
+lower_bound     // Find first position where value could be inserted
+upper_bound     // Find last position where value could be inserted
+equal_range     // Find range of elements equal to value
+binary_search   // Check if value exists (returns bool)
+### Merge Operations (require sorted ranges)
+merge           // Merge two sorted ranges
+inplace_merge   // Merge two consecutive sorted ranges in-place
+### Set Operations (require sorted ranges)
+includes        // Check if one sorted range includes another
+set_union       // Union of two sorted ranges
+set_intersection // Intersection of two sorted ranges
+set_difference  // Difference of two sorted ranges (elements in first but not second)
+set_symmetric_difference // Symmetric difference of two sorted ranges
+### Heap Operations
+make_heap       // Create heap from range
+push_heap       // Insert element into heap
+pop_heap        // Remove top element from heap
+sort_heap       // Sort heap (destroys heap property)
+### Min/Max Operations
+min             // Return smaller of two values
+max             // Return larger of two values
+min_element     // Find smallest element in range
+max_element     // Find largest element in range
+### Permutation Operations
+next_permutation // Generate next lexicographic permutation
+prev_permutation // Generate previous lexicographic permutation
+
+### Algorithms in <numeric> header:
+#include <numeric>
+
+accumulate      // Sum/accumulate values in range with binary operation
+inner_product   // Compute inner product of two ranges
+partial_sum     // Compute running/partial sums
+adjacent_difference // Compute differences between adjacent elements
 
 ### for each
 
