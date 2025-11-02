@@ -158,6 +158,14 @@ Sample1::Sample1( char p1, int p2, float p3 ): a1(p1), a2(p2), a3(p3)
 
 ## Const
 
+Parameter Type    →  Function Signature
+─────────────────────────────────────────
+const int           →  func(const int&)  ✅ OK
+const int           →  func(int&)        ❌ ERROR
+
+int (non-const)     →  func(const int&)  ✅ OK  
+int (non-const)     →  func(int&)        ✅ OK
+
 The keyword `const` declares a variable as a constant.
 
 A constant can not be assigned any value to, except at initialization time.
