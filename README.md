@@ -1154,6 +1154,23 @@ std::ostream & operator<<(std::ostream & o, pair<T,U> const & p)
 	o << "Pair( " <<p.fst() << ", " << p.snd() << " )";
 }
 
+
+### Template initiañization `T()`
+
+As i deal with templates i will know at run time the typename T i deal with. 
+¿How i know a default value of a typename T as to initialize a variable of typename T? 
+the standard C++ way to get a default-initialized value for an arbitrary type T is through Value Initialization using an empty pair of parentheses ().
+The compiler will substitute the actual type when the template is instantiated.
+
+What T() Does
+
+The expression T() performs Value Initialization, which provides a reliable default value based on the category of type T:
+|If T is a...	|Resulting Value|	Example|
+|---------------|---------------|----------|
+|Built-in Type (e.g., int, double, char, T*)	|It is initialized to zero (or NULL for pointers).	|int() is 0, double() is 0.0.|
+|Class/Struct (that has a default constructor)	|The default constructor is called.	|std::string() would call the default constructor, creating an empty string (if STL was allowed).|
+|Class/Struct (that has no default constructor)	|This will result in a compile-time error, as it must be initialized some other way.	|Requires a user-defined constructor call.|
+
 # STL
 ## containers c++98
 ### sequence containers
@@ -1201,7 +1218,7 @@ It is a group of functions that operate over a collection. In std=c++98 there ar
 
 ### Non-Modifying Sequence Operations
 #### Iterating:
-for_each        // Apply function to each element in range
++ for_each        // Apply function to each element in range
 ####  Searching/Finding:
 + find            // Find first occurrence of value
 + find_if         // Find first element satisfying predicate
@@ -1216,22 +1233,22 @@ for_each        // Apply function to each element in range
 + mismatch        // Find first position where ranges differ
 + lexicographical_compare  // Lexicographic comparison of ranges
 #### Searching (continued):
-search          // Search for subsequence
-search_n        // Search for n consecutive occurrences
++ search          // Search for subsequence
++ search_n        // Search for n consecutive occurrences
 ### Modifying Sequence Operations
 #### Copying:
-copy            // Copy range
-copy_backward   // Copy range backwards
++ copy            // Copy range
++ copy_backward   // Copy range backwards
 #### Swapping:
-swap            // Swap two values
-swap_ranges     // Swap two ranges
-iter_swap       // Swap values pointed by iterators
++ swap            // Swap two values
++ swap_ranges     // Swap two ranges
++ iter_swap       // Swap values pointed by iterators
 #### Transforming:
-transform       // Apply function to range and store results
-replace         // Replace values
-replace_if      // Replace values satisfying predicate
-replace_copy    // Copy range with replacements
-replace_copy_if // Copy range with conditional replacements
++ transform       // Apply function to range and store results
++ replace         // Replace values
++ replace_if      // Replace values satisfying predicate
++ replace_copy    // Copy range with replacements
++ replace_copy_if // Copy range with conditional replacements
 #### Filling:
 + fill            // Fill range with value
 + fill_n          // Fill n elements with value
@@ -1250,26 +1267,26 @@ replace_copy_if // Copy range with conditional replacements
 + rotate          // Rotate elements left
 + rotate_copy     // Copy rotated range
 #### Randomly shuffling:
-random_shuffle  // Randomly shuffle elements
++ random_shuffle  // Randomly shuffle elements
 #### Partitioning:
-partition       // Partition range by predicate
-stable_partition // Stable partition by predicate
++ partition       // Partition range by predicate
++ stable_partition // Stable partition by predicate
 ### Sorting Operations
 #### Sorting:
-sort            // Sort range (typically quicksort/introsort)
-stable_sort     // Stable sort (preserves relative order of equal elements)
-partial_sort    // Partially sort range (first N elements sorted)
-partial_sort_copy // Copy partially sorted range
++ sort            // Sort range (typically quicksort/introsort)
++ stable_sort     // Stable sort (preserves relative order of equal elements)
++ partial_sort    // Partially sort range (first N elements sorted)
++ partial_sort_copy // Copy partially sorted range
 #### Nth element:
-nth_element     // Partition around nth element (nth element in correct position)
++ nth_element     // Partition around nth element (nth element in correct position)
 ### Binary Search Operations (require sorted ranges)
-lower_bound     // Find first position where value could be inserted
-upper_bound     // Find last position where value could be inserted
-equal_range     // Find range of elements equal to value
-binary_search   // Check if value exists (returns bool)
++ lower_bound     // Find first position where value could be inserted
++ upper_bound     // Find last position where value could be inserted
++ equal_range     // Find range of elements equal to value
++ binary_search   // Check if value exists (returns bool)
 ### Merge Operations (require sorted ranges)
-merge           // Merge two sorted ranges
-inplace_merge   // Merge two consecutive sorted ranges in-place
++ merge           // Merge two sorted ranges
++ inplace_merge   // Merge two consecutive sorted ranges in-place
 ### Set Operations (require sorted ranges)
 includes        // Check if one sorted range includes another
 set_union       // Union of two sorted ranges
@@ -1277,26 +1294,26 @@ set_intersection // Intersection of two sorted ranges
 set_difference  // Difference of two sorted ranges (elements in first but not second)
 set_symmetric_difference // Symmetric difference of two sorted ranges
 ### Heap Operations
-make_heap       // Create heap from range
-push_heap       // Insert element into heap
-pop_heap        // Remove top element from heap
-sort_heap       // Sort heap (destroys heap property)
++ make_heap       // Create heap from range
++ push_heap       // Insert element into heap
++ pop_heap        // Remove top element from heap
++ sort_heap       // Sort heap (destroys heap property)
 ### Min/Max Operations
-min             // Return smaller of two values
-max             // Return larger of two values
-min_element     // Find smallest element in range
-max_element     // Find largest element in range
++ min             // Return smaller of two values
++ max             // Return larger of two values
++ min_element     // Find smallest element in range
++ max_element     // Find largest element in range
 ### Permutation Operations
-next_permutation // Generate next lexicographic permutation
-prev_permutation // Generate previous lexicographic permutation
++ next_permutation // Generate next lexicographic permutation
++ prev_permutation // Generate previous lexicographic permutation
 
 ### Algorithms in <numeric> header:
 #include <numeric>
 
-accumulate      // Sum/accumulate values in range with binary operation
-inner_product   // Compute inner product of two ranges
-partial_sum     // Compute running/partial sums
-adjacent_difference // Compute differences between adjacent elements
++ accumulate      // Sum/accumulate values in range with binary operation
++ inner_product   // Compute inner product of two ranges
++ partial_sum     // Compute running/partial sums
++ adjacent_difference // Compute differences between adjacent elements
 
 ### for each
 
