@@ -1212,7 +1212,7 @@ Heap_based it is stored compactly in an array. Always know the highers priority 
 #### 11.- bitset
 Keeps a fized-size sequence of bits
 
-## Algortims
+## Algorithms
 
 It is a group of functions that operate over a collection. In std=c++98 there are 71. C++23 has roughly 2.5-3x more algorithms. c++26 plans 10..15 more.
 
